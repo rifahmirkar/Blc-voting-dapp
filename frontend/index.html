@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ethereum Decentralized Voting DApp</title>
+    <!-- Google Fonts for modern typography -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="background-globes">
+        <div class="globe globe-1"></div>
+        <div class="globe globe-2"></div>
+    </div>
+
+    <main class="app-container">
+        <!-- Header Section -->
+        <header class="app-header">
+            <div class="brand-badge">
+                <span class="badge-dot"></span> Ethereum Web3 DApp
+            </div>
+            <h1 class="main-title">Decentralized Voting System</h1>
+            <p class="subtitle">Secure, transparent, and tamper-proof voting powered by smart contracts on the Ethereum blockchain.</p>
+        </header>
+
+        <!-- Wallet Connection Card -->
+        <section class="card wallet-card">
+            <div class="card-header">
+                <div class="card-title-group">
+                    <div class="icon-wrapper">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <rect x="2" y="4" width="20" height="16" rx="2" ry="2"></rect>
+                            <line x1="6" y1="8" x2="6.01" y2="8"></line>
+                            <line x1="10" y1="8" x2="18" y2="8"></line>
+                            <line x1="6" y1="12" x2="18" y2="12"></line>
+                            <line x1="6" y1="16" x2="12" y2="16"></line>
+                        </svg>
+                    </div>
+                    <div>
+                        <h2>MetaMask Wallet Authentication</h2>
+                        <p class="card-desc">Connect your Web3 wallet to verify your identity and vote on-chain.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="wallet-action-box">
+                <button id="connectWalletBtn" class="btn btn-primary">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="btn-icon">
+                        <polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"></polygon>
+                    </svg>
+                    <span>Connect MetaMask Wallet</span>
+                </button>
+
+                <div id="walletStatusBox" class="wallet-status disconnected">
+                    <span class="status-indicator"></span>
+                    <span id="walletStatusText">Status: Wallet Not Connected</span>
+                </div>
+            </div>
+
+            <div id="accountInfo" class="account-info-banner hidden">
+                <div class="info-label">Connected Wallet Address:</div>
+                <div id="userAddress" class="address-chip">0x0000...0000</div>
+            </div>
+            
+            <div id="metamaskWarning" class="alert alert-warning hidden">
+                <span class="alert-icon">⚠️</span>
+                <span>MetaMask is not installed. Please install the <a href="https://metamask.io/" target="_blank" rel="noopener">MetaMask Browser Extension</a> to interact with this DApp.</span>
+            </div>
+
+            <div id="transactionStatus" class="alert alert-info hidden">
+                <span class="alert-icon">ℹ️</span>
+                <span id="transactionStatusText">Transaction status will appear here.</span>
+            </div>
+        </section>
+
+        <!-- Election Information & Candidates Section -->
+        <section class="card election-card">
+            <div class="card-header">
+                <div class="card-title-group">
+                    <div class="icon-wrapper">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path>
+                            <circle cx="9" cy="7" r="4"></circle>
+                            <path d="M23 21v-2a4 4 0 0 0-3-3.87"></path>
+                            <path d="M16 3.13a4 4 0 0 1 0 7.75"></path>
+                        </svg>
+                    </div>
+                    <div>
+                        <h2>Official Candidates</h2>
+                        <p class="card-desc">Candidates and voting results are retrieved directly from the Ethereum blockchain.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Candidate Grid UI (Member 1 UI baseline) -->
+            <div class="candidate-grid" id="candidateGrid">
+                <!-- Static Candidate Card 1 -->
+                <div class="candidate-card" data-id="1">
+                    <div class="candidate-avatar">A</div>
+                    <div class="candidate-info">
+                        <span class="candidate-id">Candidate #1</span>
+                        <h3 class="candidate-name">Alice Johnson</h3>
+                        <div class="vote-count-badge">
+                            <span class="count-val">0</span> Votes
+                        </div>
+                    </div>
+                    <button class="btn btn-vote-placeholder" disabled>
+                        <span>Vote via Smart Contract</span>
+                    </button>
+                </div>
+
+                <!-- Static Candidate Card 2 -->
+                <div class="candidate-card" data-id="2">
+                    <div class="candidate-avatar">B</div>
+                    <div class="candidate-info">
+                        <span class="candidate-id">Candidate #2</span>
+                        <h3 class="candidate-name">Bob Smith</h3>
+                        <div class="vote-count-badge">
+                            <span class="count-val">0</span> Votes
+                        </div>
+                    </div>
+                    <button class="btn btn-vote-placeholder" disabled>
+                        <span>Vote via Smart Contract</span>
+                    </button>
+                </div>
+
+                <!-- Static Candidate Card 3 -->
+                <div class="candidate-card" data-id="3">
+                    <div class="candidate-avatar">C</div>
+                    <div class="candidate-info">
+                        <span class="candidate-id">Candidate #3</span>
+                        <h3 class="candidate-name">Charlie Brown</h3>
+                        <div class="vote-count-badge">
+                            <span class="count-val">0</span> Votes
+                        </div>
+                    </div>
+                    <button class="btn btn-vote-placeholder" disabled>
+                        <span>Vote via Smart Contract</span>
+                    </button>
+                </div>
+            </div>
+            
+            <div class="integration-note">
+                <span class="note-tag">Blockchain Status:</span> Connected to the Ethereum blockchain. Candidate data, voting transactions, and results are handled through the smart contract.
+            </div>
+        </section>
+        
+        <!-- Footer -->
+        <footer class="app-footer">
+            <p>Blockchain Mini Project &bull; Member 1 Technical Foundation &bull; Ethereum Smart Contract System</p>
+        </footer>
+    </main>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/ethers/5.7.2/ethers.umd.min.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>
